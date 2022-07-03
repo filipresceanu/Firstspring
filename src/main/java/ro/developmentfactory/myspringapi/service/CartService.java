@@ -65,6 +65,21 @@ public class CartService {
         item.setCart(cart);
         return cart;
     }
+    @Transactional
+    public Cart transferItemToCart(Long cartId,Long itemId)
+    {
+        Cart cart=getCart(cartId);
+        Item item=itemService.getItem(itemId);
+        if(Objects.nonNull(item.getCart()))
+        {
+            Cart cartdelete=item.getCart();
+            cartdelete.removeItem(item);
+
+        }
+        cart.addItem(item);
+        item.setCart(cart);
+        return cart;
+    }
 
     @Transactional
     public Cart removeItemFromCart(Long cartId, Long itemId) {

@@ -60,6 +60,14 @@ public class CartController {
         Cart cart=cartService.addItemToCart(cartId, itemId);
         return new ResponseEntity<>(CartDto.from(cart),HttpStatus.OK);
     }
+    @PostMapping(value = "{cartId}/items/{itemId}/transfer")
+    public ResponseEntity<CartDto>transferItemToCart(@PathVariable final Long cartId,
+                                                @PathVariable final Long itemId)
+    {
+        Cart cart=cartService.transferItemToCart(cartId, itemId);
+        return new ResponseEntity<>(CartDto.from(cart),HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "{cartId}/items/{itemId}/remove")
     public ResponseEntity<CartDto>removeItemFromCart(@PathVariable final Long cartId,
                                                 @PathVariable final Long itemId)

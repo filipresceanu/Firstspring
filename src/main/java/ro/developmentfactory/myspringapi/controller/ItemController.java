@@ -35,6 +35,14 @@ public class ItemController {
        return new ResponseEntity<>(itemsDto,HttpStatus.OK);
 
     }
+    @GetMapping(path = "sort")
+    public ResponseEntity<List<ItemDto>>getItemsSort()
+    {
+        List<Item>items= itemService.getItemsSort();
+        List<ItemDto>itemsDto=items.stream().map(ItemDto::from).collect(Collectors.toList());
+        return new ResponseEntity<>(itemsDto,HttpStatus.OK);
+    }
+
     @GetMapping(value="{id}")
     public ResponseEntity<ItemDto>getItem(@PathVariable final Long id)
     {
